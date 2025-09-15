@@ -1,5 +1,6 @@
+// src/components/MessageInput.jsx
 import { useState } from "react";
-import { FiSend } from "react-icons/fi"; // ✅ install react-icons if not already
+import { FiSend } from "react-icons/fi";
 
 export default function MessageInput({ onSend }) {
   const [input, setInput] = useState("");
@@ -15,15 +16,24 @@ export default function MessageInput({ onSend }) {
   return (
     <form
       onSubmit={handleSend}
-      className="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 shadow-sm"
+      className="flex items-center gap-2 bg-white border rounded-full px-4 py-2 shadow-md"
     >
-      <input
-        type="text"
+      {/* Input field */}
+      <textarea
+        rows={1}
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Type a message..."
-        className="flex-1 bg-transparent outline-none p-2 text-gray-700"
+        className="flex-1 resize-none bg-transparent outline-none text-gray-700 p-1 max-h-28"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSend(e);
+          }
+        }}
       />
+
+      {/* Send button */}
       <button
         type="submit"
         className="bg-green-600 p-2 rounded-full text-white hover:bg-green-700 transition"

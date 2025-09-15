@@ -31,64 +31,53 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-green-400 to-blue-500">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-96">
+    <div className="auth-container">
+      <div className="auth-box">
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="flex justify-center text-5xl mb-3">💬</div>
-          <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
-          <p className="text-sm text-gray-500">Login to continue chatting</p>
+        <div>
+          <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>💬</div>
+          <h2>Welcome Back</h2>
+          <p>Login to continue chatting</p>
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin}>
           {/* Username */}
-          <div className="flex items-center border rounded px-3 py-2">
-            <FaUser className="text-gray-400 mr-2" />
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+            <FaUser style={{ marginRight: "8px", color: "#888" }} />
             <input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full outline-none"
+              className="auth-input"
             />
           </div>
 
           {/* Password */}
-          <div className="flex items-center border rounded px-3 py-2">
-            <FaLock className="text-gray-400 mr-2" />
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+            <FaLock style={{ marginRight: "8px", color: "#888" }} />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full outline-none"
+              className="auth-input"
             />
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-2 rounded-lg text-white font-semibold transition ${
-              loading
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-700"
-            }`}
-          >
+          <button type="submit" disabled={loading} className="auth-btn">
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
         {/* Signup link */}
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p>
           Don’t have an account?{" "}
-          <button
-            onClick={() => navigate("/signup")}
-            className="text-blue-600 font-semibold hover:underline"
-          >
+          <button onClick={() => navigate("/signup")} className="link-btn">
             Sign up
           </button>
         </p>
