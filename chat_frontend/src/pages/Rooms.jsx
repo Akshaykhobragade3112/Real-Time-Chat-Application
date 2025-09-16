@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 import { FaComments, FaSignOutAlt } from "react-icons/fa";
+import "./Rooms.css";
 
 export default function Rooms() {
   const [rooms, setRooms] = useState([]);

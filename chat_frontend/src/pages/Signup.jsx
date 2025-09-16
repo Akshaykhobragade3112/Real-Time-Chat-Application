@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import "./Signup.css";
 
 export default function Signup() {
   const [username, setUsername] = useState("");

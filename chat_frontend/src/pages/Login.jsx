@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUser, FaLock } from "react-icons/fa";
+import "./Login.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");

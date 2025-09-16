@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAccessToken, getUserId } from "../utils/auth";
 import MessageInput from "../components/MessageInput";
+import "./ChatRoom.css";
 
 export default function ChatRoom() {
   const { roomId } = useParams();
@@ -43,40 +44,32 @@ export default function ChatRoom() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="chatroom-container">
       {/* Header */}
-      <div className="flex justify-between items-center bg-green-600 text-white px-4 py-3 shadow">
-        <h2 className="text-lg font-bold">💬 Room {roomId}</h2>
-        <button
-          onClick={() => navigate("/rooms")}
-          className="bg-red-500 px-3 py-1 rounded hover:bg-red-600 transition"
-        >
+      <div className="chatroom-header">
+        <h2>💬 Room {roomId}</h2>
+        <button onClick={() => navigate("/rooms")} className="exit-btn">
           Exit
         </button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-100 space-y-3">
+      <div className="chat-messages">
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`flex ${
-              m.user_id === userId ? "justify-end" : "justify-start"
+            className={`message-row ${
+              m.user_id === userId ? "my-message" : "other-message"
             }`}
           >
-            <div
-              className={`max-w-xs px-4 py-2 rounded-2xl shadow-md ${
-                m.user_id === userId
-                  ? "bg-green-500 text-white rounded-br-none"
-                  : "bg-white text-gray-800 rounded-bl-none"
-              }`}
-            >
-              <p className="text-xs font-semibold opacity-80 mb-1">
-                {m.username}
-              </p>
-              <p className="text-sm">{m.message}</p>
-              <p className="text-[10px] text-gray-400 mt-1 text-right">
-                {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+            <div className="message-bubble">
+              <p className="message-username">{m.username}</p>
+              <p className="message-text">{m.message}</p>
+              <p className="message-time">
+                {new Date().toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </p>
             </div>
           </div>
@@ -85,7 +78,7 @@ export default function ChatRoom() {
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t bg-white">
+      <div className="chat-input">
         <MessageInput onSend={sendMessage} />
       </div>
     </div>

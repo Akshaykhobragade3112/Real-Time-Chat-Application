@@ -1,40 +1,26 @@
+// src/components/MessageList.jsx
+import "../components/MessageList.css";
 
 export default function MessageList({ messages, userId }) {
   return (
-    <div className="flex flex-col gap-2 h-full overflow-y-auto p-2">
+    <div className="message-list">
       {messages.map((m, i) => {
         const isSystem = m.username === "System";
         const isMine = m.user_id === userId;
 
         if (isSystem) {
           return (
-            <div
-              key={i}
-              className="text-center text-gray-500 text-sm italic my-2"
-            >
+            <div key={i} className="system-message">
               {m.message}
             </div>
           );
         }
 
         return (
-          <div
-            key={i}
-            className={`flex ${isMine ? "justify-end" : "justify-start"}`}
-          >
-            <div
-              className={`max-w-xs px-4 py-2 rounded-lg shadow ${
-                isMine
-                  ? "bg-green-500 text-white rounded-br-none"
-                  : "bg-gray-200 text-gray-900 rounded-bl-none"
-              }`}
-            >
-              {!isMine && (
-                <div className="text-xs text-gray-600 font-semibold">
-                  {m.username}
-                </div>
-              )}
-              <div>{m.message}</div>
+          <div key={i} className={`message-row ${isMine ? "my-message" : "other-message"}`}>
+            <div className={`message-bubble ${isMine ? "mine" : "theirs"}`}>
+              {!isMine && <div className="message-username">{m.username}</div>}
+              <div className="message-text">{m.message}</div>
             </div>
           </div>
         );

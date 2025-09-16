@@ -1,23 +1,23 @@
-/* src/App.css */
-
-/* Reset */
+/* ---------- Reset ---------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Smooth font rendering */
+/* ---------- Global Body ---------- */
 body {
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: #f9fafb;
   color: #333;
+  font-size: 14px; /* Slightly smaller base */
+  line-height: 1.5;
 }
 
-/* Scrollbar styling */
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
@@ -30,93 +30,146 @@ body {
   background: #6b7280;
 }
 
-
-/* Rooms Page */
-.rooms-container {
-  display: flex;
-  height: 100vh;
-  background: #f7f7f7;
-  font-family: Arial, sans-serif;
-}
-
-.sidebar {
-  width: 280px;
-  background: #fff;
-  border-right: 1px solid #ddd;
+/* ---------- App Container ---------- */
+.app-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to bottom right, #e8f5e9, #f1f8e9);
 }
 
-.sidebar-header {
+/* ---------- Header ---------- */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   background: #2e7d32;
   color: white;
-  padding: 15px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  height: 60px; /* fixed height */
 }
 
-.sidebar-title {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+.app-title {
+  font-size: 18px; /* reduced */
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .logout-btn {
-  background: none;
+  background: #e53935;
   border: none;
+  padding: 6px 12px; /* reduced */
+  border-radius: 5px;
   color: white;
-  cursor: pointer;
-}
-
-.room-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex: 1;
-  overflow-y: auto;
-}
-
-.room-item {
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.room-item:hover {
-  background: #f0f0f0;
-}
-
-.room-name {
-  font-weight: 500;
-}
-
-.join-btn {
-  background: #1976d2;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
   font-size: 13px;
   cursor: pointer;
   transition: background 0.3s;
 }
-
-.join-btn:hover {
-  background: #1565c0;
+.logout-btn:hover {
+  background: #c62828;
 }
 
-.chat-placeholder {
+/* ---------- Main ---------- */
+.app-main {
   flex: 1;
+  padding: 70px 15px 55px; /* top = header height + margin, bottom = footer height + margin */
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #777;
+  overflow-y: auto; /* scroll inside main area */
+}
+
+.content-box {
+  background: white;
+  padding: 15px; /* reduced */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 700px; /* smaller */
+  min-height: 350px; /* smaller */
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  text-align: center;
+  padding: 10px 15px;
+  background: #2e7d32;
+  color: white;
+  font-size: 14px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: white;
   font-size: 18px;
-  font-style: italic;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #34b7f1; /* Accent blue */
+}
+
+/* ---------- Responsive ---------- */
+
+/* Tablets (<= 1024px) */
+@media (max-width: 1024px) {
+  .app-main {
+    padding: 10px;
+  }
+
+  .content-box {
+    max-width: 600px;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 8px 15px;
+  }
+
+  .app-title {
+    font-size: 16px;
+  }
+
+  .logout-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .app-main {
+    padding: 8px;
+  }
+
+  .content-box {
+    padding: 10px;
+    border-radius: 6px;
+    min-height: auto;
+    max-width: 100%;
+  }
+
+  .app-footer {
+    font-size: 11px;
+    padding: 6px;
+  }
 }
