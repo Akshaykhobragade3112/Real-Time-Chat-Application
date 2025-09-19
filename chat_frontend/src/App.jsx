@@ -56,11 +56,11 @@ export default function App() {
       {/* Footer */}
       <footer className="app-footer">
         <p>
-          ⚡ Built with Django + React + WebSockets | Developed by{" "}
+           Built the Real-Time Chat Application with Django + React + WebSockets | Developed by{" "}
           <strong>Akshay Khobragade</strong>
         </p>
         <div className="footer-links">
-          <a href="https://www.linkedin.com/in/akshaykhobragade3112/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/akshaykhobragade123/" target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
           </a>
           <a href="https://github.com/Akshaykhobragade3112" target="_blank" rel="noopener noreferrer">

@@ -44,8 +44,8 @@ export default function Login() {
         {/* Login Form */}
         <form onSubmit={handleLogin}>
           {/* Username */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
-            <FaUser style={{ marginRight: "8px", color: "#888" }} />
+          <div className="input-group">
+            <FaUser />
             <input
               type="text"
               placeholder="Username"
@@ -57,8 +57,8 @@ export default function Login() {
           </div>
 
           {/* Password */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
-            <FaLock style={{ marginRight: "8px", color: "#888" }} />
+          <div className="input-group">
+            <FaLock />
             <input
               type="password"
               placeholder="Password"

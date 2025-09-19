@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: calc(100vh - 120px); /* leave space for header/footer */
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -14,24 +14,37 @@
 /* Auth Box */
 .auth-box {
   background: #fff;
-  padding: 30px 25px;
+  padding: 25px 20px;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 380px;
+  max-width: 360px;
   text-align: center;
 }
 
 .auth-box h2 {
-  font-size: 24px;
-  margin-bottom: 5px;
+  font-size: 22px;
+  margin-bottom: 6px;
   color: #333;
 }
 
 .auth-box p {
   font-size: 14px;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+}
+
+/* Input wrapper (icon + input) */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.input-group svg {
+  margin-right: 8px;
+  color: #888;
+  font-size: 14px;
 }
 
 /* Input */
@@ -91,7 +104,7 @@
 /* Tablets */
 @media (max-width: 768px) {
   .auth-box {
-    padding: 25px 20px;
+    padding: 20px 18px;
     max-width: 90%;
   }
   .auth-box h2 {
@@ -102,7 +115,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .auth-box {
-    padding: 20px 15px;
+    padding: 18px 15px;
   }
   .auth-input {
     font-size: 13px;
@@ -111,5 +124,9 @@
   .auth-btn {
     font-size: 14px;
     padding: 8px;
+  }
+  .input-group svg {
+    font-size: 12px;
+    margin-right: 6px;
   }
 }

@@ -43,8 +43,8 @@ export default function Signup() {
         {/* Signup Form */}
         <form onSubmit={handleSignup}>
           {/* Username */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
-            <FaUser style={{ marginRight: "8px", color: "#888" }} />
+          <div className="input-group">
+            <FaUser />
             <input
               type="text"
               placeholder="Username"
@@ -56,8 +56,8 @@ export default function Signup() {
           </div>
 
           {/* Email */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
-            <FaEnvelope style={{ marginRight: "8px", color: "#888" }} />
+          <div className="input-group">
+            <FaEnvelope />
             <input
               type="email"
               placeholder="Email"
@@ -69,8 +69,8 @@ export default function Signup() {
           </div>
 
           {/* Password */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
-            <FaLock style={{ marginRight: "8px", color: "#888" }} />
+          <div className="input-group">
+            <FaLock />
             <input
               type="password"
               placeholder="Password"
