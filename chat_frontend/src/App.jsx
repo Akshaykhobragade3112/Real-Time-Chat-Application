@@ -56,7 +56,7 @@ export default function App() {
       {/* Footer */}
       <footer className="app-footer">
         <p>
-           Built the Real-Time Chat Application with Django + React + WebSockets | Developed by{" "}
+           Built the Real-Time Chat Application with Django + React + WebSockets and cache(Redis) | Developed by{" "}
           <strong>Akshay Khobragade</strong>
         </p>
         <div className="footer-links">
