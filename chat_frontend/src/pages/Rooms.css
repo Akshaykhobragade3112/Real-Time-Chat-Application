@@ -117,3 +117,105 @@
     padding: 15px;
   }
 }
+
+
+/* New-room button in header */
+.new-room-btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.new-room-btn:hover {
+  background: #1565c0;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Modal box */
+.modal {
+  background: #fff;
+  padding: 18px;
+  width: 95%;
+  max-width: 420px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* Modal content */
+.modal h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 12px;
+}
+.modal-input:focus {
+  border-color: #1976d2;
+}
+
+/* Modal actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-cancel {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modal-create {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modal-create:disabled,
+.modal-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* make sure modal looks good on small screens */
+@media (max-width: 480px) {
+  .modal {
+    padding: 14px;
+    border-radius: 8px;
+  }
+  .modal h3 {
+    font-size: 16px;
+  }
+  .modal-input {
+    font-size: 14px;
+  }
+}
