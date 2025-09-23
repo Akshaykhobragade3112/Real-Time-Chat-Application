@@ -1,0 +1,40 @@
+
+
+services:
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  web:
+    build:
+      context: ./chat_backend
+    container_name: chat_backend_web
+    env_file:
+      - .env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./chat_backend:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./chat_frontend
+    container_name: chat_frontend
+    ports:
+      - "3000:80"  # host:container (80)
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  redis_data:

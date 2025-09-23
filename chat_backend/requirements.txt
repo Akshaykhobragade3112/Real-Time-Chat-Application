@@ -2,6 +2,7 @@ Django
 djangorestframework
 djangorestframework-simplejwt
 channels
-channels-redis
+channels_redis
 daphne
 django-cors-headers
+whitenoise
