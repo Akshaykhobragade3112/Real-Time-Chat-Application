@@ -11,6 +11,16 @@ class ChatRoomListCreateView(generics.ListCreateAPIView):
     serializer_class = ChatRoomSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+class ChatRoomDeleteView(generics.RetrieveDestroyAPIView):
+    queryset = ChatRoom.objects.all()
+    serializer_class = ChatRoomSerializer
+    permission_classes = [permissions.IsAuthenticated]  # only logged-in users can delete
+    lookup_field = 'id'  # allows /rooms/<id>/delete/
+    
+    def perform_destroy(self, instance):
+        # custom logic (if needed, e.g., check permissions)
+        instance.delete()
+
 class MessageListCreateView(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
     permission_classes = [permissions.IsAuthenticated]

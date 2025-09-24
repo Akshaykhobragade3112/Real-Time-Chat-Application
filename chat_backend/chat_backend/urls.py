@@ -24,5 +24,3 @@ urlpatterns = [
     path('api/chat/', include('chat.urls')),
 ]
 
-
-
