@@ -5,21 +5,29 @@ from django.shortcuts import render
 from rest_framework import generics, permissions
 from .models import ChatRoom, Message
 from .serializers import ChatRoomSerializer, MessageSerializer
+from rest_framework.response import Response
+from rest_framework import status
+
 
 class ChatRoomListCreateView(generics.ListCreateAPIView):
     queryset = ChatRoom.objects.all()
     serializer_class = ChatRoomSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class ChatRoomDeleteView(generics.RetrieveDestroyAPIView):
+class ChatRoomDeleteView(generics.DestroyAPIView):
     queryset = ChatRoom.objects.all()
     serializer_class = ChatRoomSerializer
-    permission_classes = [permissions.IsAuthenticated]  # only logged-in users can delete
+    permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'id'  # allows /rooms/<id>/delete/
-    
-    def perform_destroy(self, instance):
-        # custom logic (if needed, e.g., check permissions)
-        instance.delete()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        room_name = instance.name
+        self.perform_destroy(instance)
+        return Response(
+            {"message": f"'{room_name}' room is deleted successfully."},
+            status=status.HTTP_200_OK
+        )
 
 class MessageListCreateView(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
