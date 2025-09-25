@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
-import { FaComments, FaSignOutAlt, FaPlus } from "react-icons/fa";
+import { FaComments, FaSignOutAlt, FaPlus, FaTrash } from "react-icons/fa";
 import "./Rooms.css";
 
 export default function Rooms() {
@@ -33,7 +33,6 @@ export default function Rooms() {
   const openCreate = () => {
     setNewRoomName("");
     setShowCreateModal(true);
-    // accessibility: focus will be on the input (handled by browser when modal opens)
   };
 
   const closeCreate = () => {
@@ -51,12 +50,9 @@ export default function Rooms() {
     setCreating(true);
     try {
       const res = await API.post("chat/rooms/", { name });
-      // res.data should be the created room (id + name)
       const created = res.data;
-      // Append to rooms list (at top)
       setRooms((prev) => [created, ...prev]);
       setShowCreateModal(false);
-      // Optionally navigate directly to the room
       if (created?.id) {
         navigate(`/chat/${created.id}`);
       } else {
@@ -64,7 +60,6 @@ export default function Rooms() {
       }
     } catch (err) {
       console.error("Create room error:", err);
-      // Try to show server error
       const errMsg =
         err.response?.data?.name?.[0] ||
         err.response?.data?.detail ||
@@ -76,22 +71,30 @@ export default function Rooms() {
     }
   };
 
+  // 🔹 Delete room
+  const deleteRoom = async (roomId, roomName) => {
+    if (!window.confirm(`Are you sure you want to delete "${roomName}"?`)) return;
+    try {
+      const res = await API.delete(`chat/rooms/${roomId}/delete/`);
+      alert(res.data.message); // "'Roomname' room is deleted successfully."
+      setRooms((prev) => prev.filter((r) => r.id !== roomId));
+    } catch (err) {
+      console.error("Delete room error:", err);
+      alert("❌ Failed to delete room");
+    }
+  };
+
   return (
     <div className="rooms-container">
       {/* Sidebar */}
       <div className="sidebar">
-        {/* Header */}
         <div className="sidebar-header">
           <span className="sidebar-title">
             <FaComments style={{ marginRight: 8 }} /> Chat Rooms
           </span>
 
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <button
-              onClick={openCreate}
-              className="new-room-btn"
-              title="Create new room"
-            >
+            <button onClick={openCreate} className="new-room-btn" title="Create new room">
               <FaPlus /> New
             </button>
 
@@ -116,28 +119,42 @@ export default function Rooms() {
             <li style={{ padding: 16, color: "#666" }}>No rooms yet</li>
           ) : (
             rooms.map((room) => (
-              <li
-                key={room.id}
-                onClick={() => navigate(`/chat/${room.id}`)}
-                className="room-item"
-              >
-                <span className="room-name">{room.name}</span>
-                <button
-                  onClick={(ev) => {
-                    ev.stopPropagation();
-                    navigate(`/chat/${room.id}`);
-                  }}
-                  className="join-btn"
+              <li key={room.id} className="room-item">
+                <span
+                  className="room-name"
+                  onClick={() => navigate(`/chat/${room.id}`)}
+                  style={{ cursor: "pointer" }}
                 >
-                  Join
-                </button>
+                  {room.name}
+                </span>
+
+                <div style={{ display: "flex", gap: "6px" }}>
+                  <button
+                    onClick={(ev) => {
+                      ev.stopPropagation();
+                      navigate(`/chat/${room.id}`);
+                    }}
+                    className="join-btn"
+                  >
+                    Join
+                  </button>
+                  <button
+                    onClick={(ev) => {
+                      ev.stopPropagation();
+                      deleteRoom(room.id, room.name);
+                    }}
+                    className="delete-btn"
+                    title="Delete room"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </li>
             ))
           )}
         </ul>
       </div>
 
-      {/* Placeholder for Chat Area */}
       <div className="chat-placeholder">
         <p>👈 Select a room to start chatting</p>
       </div>
@@ -145,12 +162,7 @@ export default function Rooms() {
       {/* Create Modal */}
       {showCreateModal && (
         <div className="modal-overlay" onClick={closeCreate}>
-          <div
-            className="modal"
-            role="dialog"
-            aria-modal="true"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
             <h3>Create new room</h3>
             <form onSubmit={createRoom}>
               <input
