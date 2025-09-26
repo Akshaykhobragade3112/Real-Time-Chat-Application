@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class ChatRoom(models.Model):
     name = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey(User, related_name="chatrooms", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.id}:{self.name}"

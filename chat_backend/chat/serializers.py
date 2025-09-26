@@ -13,9 +13,11 @@ class MessageSerializer(serializers.ModelSerializer):
 
 class ChatRoomSerializer(serializers.ModelSerializer):
     last_message = serializers.SerializerMethodField()
+    creator_username = serializers.CharField(source='creator.username', read_only=True)
+
     class Meta:
         model = ChatRoom
-        fields = ['id','name','created_at','last_message']
+        fields = ['id','name','created_at','last_message','creator_username']
 
     def get_last_message(self, obj):
         last = obj.messages.last()
