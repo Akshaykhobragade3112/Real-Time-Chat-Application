@@ -1,4 +1,3 @@
-// src/pages/Signup.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,10 +20,10 @@ export default function Signup() {
         email,
         password,
       });
-      alert("✅ Signup successful! Please login.");
+      alert("Signup successful! Please login.");
       navigate("/"); // redirect to login
     } catch (err) {
-      alert("❌ Signup failed: " + (err.response?.data?.detail || "Unknown error"));
+      alert("Signup failed: " + (err.response?.data?.detail || "Unknown error"));
     } finally {
       setLoading(false);
     }

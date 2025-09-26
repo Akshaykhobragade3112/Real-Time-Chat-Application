@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -25,7 +24,7 @@ export default function Login() {
       navigate("/rooms");
       window.location.reload();
     } catch (error) {
-      alert("❌ Login failed: " + (error.response?.data?.detail || error.message));
+      alert("Login failed: " + (error.response?.data?.detail || error.message));
     } finally {
       setLoading(false);
     }

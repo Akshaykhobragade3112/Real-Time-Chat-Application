@@ -1,4 +1,3 @@
-// src/pages/Rooms.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
@@ -65,22 +64,22 @@ export default function Rooms() {
         err.response?.data?.detail ||
         err.message ||
         "Failed to create room";
-      alert("❌ Create failed: " + errMsg);
+      alert("Create failed: " + errMsg);
     } finally {
       setCreating(false);
     }
   };
 
-  // 🔹 Delete room
+  // Delete room
   const deleteRoom = async (roomId, roomName) => {
     if (!window.confirm(`Are you sure you want to delete "${roomName}"?`)) return;
     try {
       const res = await API.delete(`chat/rooms/${roomId}/delete/`);
-      alert(res.data.message); // "'Roomname' room is deleted successfully."
+      alert(res.data.message); 
       setRooms((prev) => prev.filter((r) => r.id !== roomId));
     } catch (err) {
       console.error("Delete room error:", err);
-      alert("❌ Failed to delete room");
+      alert("Failed to delete room");
     }
   };
 
@@ -168,7 +167,7 @@ export default function Rooms() {
               <input
                 autoFocus
                 className="modal-input"
-                placeholder="Room name (e.g. Group-B)"
+                placeholder="Room name (e.g. 'General')"
                 value={newRoomName}
                 onChange={(e) => setNewRoomName(e.target.value)}
                 maxLength={60}

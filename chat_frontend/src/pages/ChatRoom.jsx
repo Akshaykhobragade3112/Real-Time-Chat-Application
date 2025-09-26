@@ -1,4 +1,3 @@
-// src/pages/ChatRoom.jsx
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAccessToken, getUserId } from "../utils/auth";
@@ -22,12 +21,12 @@ export default function ChatRoom() {
     );
     wsRef.current = ws;
 
-    ws.onopen = () => console.log("✅ Connected to WebSocket");
+    ws.onopen = () => console.log("Connected to WebSocket");
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       setMessages((prev) => [...prev, data]);
     };
-    ws.onclose = () => console.log("❌ WebSocket closed");
+    ws.onclose = () => console.log("WebSocket closed");
 
     return () => ws.close();
   }, [roomId]);
