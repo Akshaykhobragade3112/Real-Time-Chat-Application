@@ -1,10 +1,10 @@
 .rooms-container {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 120px); /* leave room for header (60px) + footer (60px) */
+  min-height: calc(100vh - 120px); 
   background: #f7f7f7;
-  margin-top: 60px;  /* push below header */
-  margin-bottom: 60px; /* push above footer */
+  margin-top: 60px;  
+  margin-bottom: 60px; 
 }
 
 /* Sidebar */
@@ -96,9 +96,9 @@
 /* Mobile */
 @media (max-width: 768px) {
   .rooms-container {
-    flex-direction: column; /* stack vertically */
-    margin-top: 60px;  /* still below navbar */
-    margin-bottom: 60px; /* above footer */
+    flex-direction: column; 
+    margin-top: 60px;  
+    margin-bottom: 60px; 
   }
 
   .sidebar {
@@ -108,7 +108,7 @@
   }
 
   .room-list {
-    max-height: 200px; /* prevent sidebar from taking whole screen */
+    max-height: 200px; 
     overflow-y: auto;
   }
 

@@ -1,4 +1,3 @@
-// src/components/MessageInput.jsx
 import { useState } from "react";
 import { FiSend } from "react-icons/fi";
 import "./MessageInput.css";

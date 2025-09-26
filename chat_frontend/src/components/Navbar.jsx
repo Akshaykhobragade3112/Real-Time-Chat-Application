@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import "../components/Navbar.css";
 
 export default function Navbar({ onLogout }) {

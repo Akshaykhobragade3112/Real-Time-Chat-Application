@@ -1,11 +1,10 @@
-/* src/pages/Login.css */
 
 /* Container */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 120px); /* leaves space for header+footer */
+  min-height: calc(100vh - 120px); 
   background: linear-gradient(135deg, #43cea2, #185a9d);
   font-family: Arial, sans-serif;
   padding: 20px;

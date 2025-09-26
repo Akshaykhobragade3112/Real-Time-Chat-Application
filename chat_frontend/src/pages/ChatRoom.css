@@ -1,10 +1,10 @@
 .chatroom-container {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 120px); /* leaves space for header + footer */
+  min-height: calc(100vh - 120px); 
   background: #f5f5f5;
-  margin-top: 60px;  /* push below global header */
-  margin-bottom: 60px; /* push above global footer */
+  margin-top: 60px;     
+  margin-bottom: 60px;
 }
 
 /* Chat Room Header */

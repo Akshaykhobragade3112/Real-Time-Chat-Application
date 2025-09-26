@@ -1,4 +1,3 @@
-// src/components/MessageList.jsx
 import "../components/MessageList.css";
 
 export default function MessageList({ messages, userId }) {

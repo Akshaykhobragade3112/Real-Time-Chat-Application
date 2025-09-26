@@ -1,11 +1,10 @@
-// src/App.jsx
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Rooms from "./pages/Rooms";
 import ChatRoom from "./pages/ChatRoom";
 import { clearTokens, getAccessToken } from "./utils/auth";
-import Navbar from "./components/Navbar"; // ✅ Import Navbar
+import Navbar from "./components/Navbar"; 
 import "./App.css";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
