@@ -1,3 +1,4 @@
+// src/pages/Rooms.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
@@ -70,16 +71,25 @@ export default function Rooms() {
     }
   };
 
-  // Delete room
+  // ✅ Delete room with direct popup for non-creators
   const deleteRoom = async (roomId, roomName) => {
-    if (!window.confirm(`Are you sure you want to delete "${roomName}"?`)) return;
     try {
       const res = await API.delete(`chat/rooms/${roomId}/delete/`);
-      alert(res.data.message); 
+      alert(res.data.message);
       setRooms((prev) => prev.filter((r) => r.id !== roomId));
     } catch (err) {
       console.error("Delete room error:", err);
-      alert("Failed to delete room");
+
+      if (err.response?.status === 403) {
+        // 🚨 Show warning immediately — no confirm popup
+        alert("⚠️ Can't delete this room — only the creator can delete it.");
+      } else {
+        const errMsg =
+          err.response?.data?.detail ||
+          err.message ||
+          "Failed to delete room";
+        alert("❌ " + errMsg);
+      }
     }
   };
 
