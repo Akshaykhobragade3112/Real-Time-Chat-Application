@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-st$#7-q+dczv2v1w3$%070__%q8@21%2-))8kisn@7cwxe!ffw
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["real-time-chat-application-lre0.onrender.com", "localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://real-time-chat-application-lre0.onrender.com"]
 
 
 # Application definition
