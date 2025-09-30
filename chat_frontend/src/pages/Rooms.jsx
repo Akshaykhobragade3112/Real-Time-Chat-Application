@@ -1,4 +1,3 @@
-// src/pages/Rooms.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
@@ -14,13 +13,14 @@ export default function Rooms() {
   const [creating, setCreating] = useState(false);
   const navigate = useNavigate();
 
-  // 👇 get current userId from JWT
+  
   const token = localStorage.getItem("access");
   let currentUserId = null;
   if (token) {
     try {
       const decoded = jwtDecode(token);
-      currentUserId = decoded.user_id; // 👈 backend includes user_id in JWT payload
+       //backend includes user_id in JWT payload
+      currentUserId = decoded.user_id;
     } catch (err) {
       console.error("JWT decode error:", err);
     }
@@ -92,7 +92,7 @@ export default function Rooms() {
       setRooms((prev) => prev.filter((r) => r.id !== roomId));
     } catch (err) {
       console.error("Delete room error:", err);
-      alert("❌ Failed to delete room");
+      alert("Failed to delete room");
     }
   };
 
@@ -149,7 +149,7 @@ export default function Rooms() {
                     Join
                   </button>
 
-                  {/* 👇 Only show delete if user is creator */}
+                  {/*Only show delete if user is creator */}
                   {Number(currentUserId) === Number(room.creator_id) && (
                     <button
                       onClick={(ev) => {
