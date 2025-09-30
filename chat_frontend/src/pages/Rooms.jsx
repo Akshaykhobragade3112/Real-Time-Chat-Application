@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 import { FaComments, FaSignOutAlt, FaPlus, FaTrash } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";  
 import "./Rooms.css";
 
 export default function Rooms() {
@@ -12,6 +13,18 @@ export default function Rooms() {
   const [newRoomName, setNewRoomName] = useState("");
   const [creating, setCreating] = useState(false);
   const navigate = useNavigate();
+
+  // 👇 get current userId from JWT
+  const token = localStorage.getItem("access");
+  let currentUserId = null;
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      currentUserId = decoded.user_id; // 👈 backend includes user_id in JWT payload
+    } catch (err) {
+      console.error("JWT decode error:", err);
+    }
+  }
 
   useEffect(() => {
     fetchRooms();
@@ -71,31 +84,20 @@ export default function Rooms() {
     }
   };
 
-  // ✅ Delete room with direct popup for non-creators
   const deleteRoom = async (roomId, roomName) => {
+    if (!window.confirm(`Are you sure you want to delete "${roomName}"?`)) return;
     try {
       const res = await API.delete(`chat/rooms/${roomId}/delete/`);
       alert(res.data.message);
       setRooms((prev) => prev.filter((r) => r.id !== roomId));
     } catch (err) {
       console.error("Delete room error:", err);
-
-      if (err.response?.status === 403) {
-        // 🚨 Show warning immediately — no confirm popup
-        alert("⚠️ Can't delete this room — only the creator can delete it.");
-      } else {
-        const errMsg =
-          err.response?.data?.detail ||
-          err.message ||
-          "Failed to delete room";
-        alert("❌ " + errMsg);
-      }
+      alert("❌ Failed to delete room");
     }
   };
 
   return (
     <div className="rooms-container">
-      {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-header">
           <span className="sidebar-title">
@@ -120,7 +122,6 @@ export default function Rooms() {
           </div>
         </div>
 
-        {/* Rooms List */}
         <ul className="room-list" aria-live="polite">
           {loadingRooms ? (
             <li style={{ padding: 16, color: "#666" }}>Loading...</li>
@@ -147,16 +148,20 @@ export default function Rooms() {
                   >
                     Join
                   </button>
-                  <button
-                    onClick={(ev) => {
-                      ev.stopPropagation();
-                      deleteRoom(room.id, room.name);
-                    }}
-                    className="delete-btn"
-                    title="Delete room"
-                  >
-                    <FaTrash />
-                  </button>
+
+                  {/* 👇 Only show delete if user is creator */}
+                  {Number(currentUserId) === Number(room.creator_id) && (
+                    <button
+                      onClick={(ev) => {
+                        ev.stopPropagation();
+                        deleteRoom(room.id, room.name);
+                      }}
+                      className="delete-btn"
+                      title="Delete room"
+                    >
+                      <FaTrash />
+                    </button>
+                  )}
                 </div>
               </li>
             ))
@@ -168,7 +173,6 @@ export default function Rooms() {
         <p>👈 Select a room to start chatting</p>
       </div>
 
-      {/* Create Modal */}
       {showCreateModal && (
         <div className="modal-overlay" onClick={closeCreate}>
           <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
@@ -202,3 +206,4 @@ export default function Rooms() {
     </div>
   );
 }
+ 
