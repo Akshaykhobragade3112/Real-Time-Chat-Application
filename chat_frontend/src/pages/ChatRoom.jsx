@@ -17,7 +17,7 @@ export default function ChatRoom() {
     if (!token) return;
 
     const ws = new WebSocket(
-      `ws://127.0.0.1:8000/ws/chat/${roomId}/?token=${token}`
+      `ws://${import.meta.env.VITE_API_BASE_URL.replace(/^https?:\/\//, "")}/ws/chat/${roomId}/?token=${token}`
     );
     wsRef.current = ws;
 
