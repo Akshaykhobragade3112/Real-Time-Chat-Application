@@ -10,9 +10,8 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
-    "https://chat-application-real-time-backend.onrender.com",
-    "https://chat-application-real-time-backend.onrender.com/api/",
-    "https://chat-application-real-time-app.onrender.com",
+    "https://real-time-chat-application-bsgr.onrender.com",
+    "https://chat-application-real-time-backend.onrender.com"
 ]
 
 INSTALLED_APPS = [
@@ -64,9 +63,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost",
-    "https://chat-application-real-time-app.onrender.com",
+    "https://real-time-chat-application-bsgr.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_ALL_ORIGINS = False
 
 WSGI_APPLICATION = "chat_backend.wsgi.application"
 ASGI_APPLICATION = "chat_backend.asgi.application"
