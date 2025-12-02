@@ -81,6 +81,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost",
+    "https://chat-application-real-time-app.onrender.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
