@@ -10,9 +10,9 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
-    "https://real-time-chat-application-lre0.onrender.com",
-    "https://your-backend.onrender.com",
-    "https://your-frontend.onrender.com",
+    "https://chat-application-real-time-backend.onrender.com",
+    "https://chat-application-real-time-backend.onrender.com/api/",
+    "https://chat-application-real-time-app.onrender.com",
 ]
 
 INSTALLED_APPS = [
