@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://chat-application-real-time-backend.onrender.com",
+        target: "https://real-time-chat-application-backend-qjrb.onrender.com",
         changeOrigin: true,
         secure: false,
       },
