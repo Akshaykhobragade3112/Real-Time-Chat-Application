@@ -16,8 +16,7 @@ export default function ChatRoom() {
     const token = getAccessToken();
     if (!token) return;
 
-    const ws = new WebSocket(
-      `ws://${import.meta.env.VITE_API_BASE_URL.replace(/^https?:\/\//, "")}/ws/chat/${roomId}/?token=${token}`
+    const ws = new WebSocket(`wss://real-time-chat-application-backend-qjrb.onrender.com/ws/chat/${roomId}/?token=${token}`
     );
     wsRef.current = ws;
 
